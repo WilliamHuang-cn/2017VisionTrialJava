@@ -67,7 +67,7 @@ public class Robot extends IterativeRobot {
 		axisVisionThread = new Thread(() -> {
 			
 			// Create pipeline instance
-			Pipeline pipe = new Pipeline();
+			GripPipeline pipe = new GripPipeline();
 			
 			// Get the UsbCamera from CameraServer
 			AxisCamera camera = CameraServer.getInstance().addAxisCamera("Axis","10.13.91.3");
@@ -95,12 +95,10 @@ public class Robot extends IterativeRobot {
 					continue;
 				}
 				
-				// 
-				pipe.setsource0(mat);
-				pipe.process();
+				// Run pipeline
+				pipe.process(mat);
 				
-				String tempString = pipe.findContoursOutput().get(0).toString();
-//				Imgproc.putText(mat, tempString, cv::Point(10,50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(255,255,0));
+				String tempString = pipe.filterContoursOutput().get(0).get(0, 0).toString();
 				Imgproc.putText(mat,tempString,new Point(10,50),Core.FONT_HERSHEY_SIMPLEX,1,new Scalar(255,255,0));
 				
 				// Put a rectangle on the image
