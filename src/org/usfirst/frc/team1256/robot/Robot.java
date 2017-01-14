@@ -99,7 +99,7 @@ public class Robot extends IterativeRobot {
 				pipe.setsource0(mat);
 				pipe.process();
 				
-				String tempString = pipe.findContoursOutput().toString();
+				String tempString = pipe.findContoursOutput().get(0).toString();
 //				Imgproc.putText(mat, tempString, cv::Point(10,50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(255,255,0));
 				Imgproc.putText(mat,tempString,new Point(10,50),Core.FONT_HERSHEY_SIMPLEX,1,new Scalar(255,255,0));
 				
